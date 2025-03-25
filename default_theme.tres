@@ -1,0 +1,71 @@
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://bcg8prklrnnu5"]
+
+[ext_resource type="Texture2D" uid="uid://bgfy81qvtypr" path="res://sprites/circle.png" id="1_xm665"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fe800"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_08ndq"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_l3qae"]
+color = Color(0.537255, 0.537255, 0.537255, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 2
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_chi6u"]
+color = Color(0.72549, 0.72549, 0.72549, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 2
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_lxcoy"]
+color = Color(0.219608, 0.219608, 0.219608, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 2
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_tdu14"]
+color = Color(0.537255, 0.537255, 0.537255, 1)
+thickness = 3
+vertical = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_d8ke4"]
+color = Color(0.72549, 0.72549, 0.72549, 1)
+thickness = 3
+vertical = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_rblen"]
+color = Color(0.72549, 0.72549, 0.72549, 1)
+thickness = 3
+vertical = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_f1s4g"]
+content_margin_right = 4.0
+color = Color(0.219608, 0.219608, 0.219608, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 3
+vertical = true
+
+[resource]
+Button/colors/font_color = Color(0.537255, 0.537255, 0.537255, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/constants/h_separation = 0
+Button/font_sizes/font_size = 8
+Button/fonts/font = null
+Button/styles/focus = SubResource("StyleBoxEmpty_fe800")
+Button/styles/hover = SubResource("StyleBoxEmpty_08ndq")
+HSlider/icons/grabber = ExtResource("1_xm665")
+HSlider/icons/grabber_disabled = ExtResource("1_xm665")
+HSlider/icons/grabber_highlight = ExtResource("1_xm665")
+HSlider/styles/grabber_area = SubResource("StyleBoxLine_l3qae")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxLine_chi6u")
+HSlider/styles/slider = SubResource("StyleBoxLine_lxcoy")
+Label/font_sizes/font_size = 8
+Label/fonts/font = null
+VBoxContainer/constants/separation = 2
+VScrollBar/styles/grabber = SubResource("StyleBoxLine_tdu14")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxLine_d8ke4")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxLine_rblen")
+VScrollBar/styles/scroll = SubResource("StyleBoxLine_f1s4g")

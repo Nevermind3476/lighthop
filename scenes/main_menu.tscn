@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://bt4vxkko0uk24"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_ac4wu"]
+[ext_resource type="Texture2D" uid="uid://p31h1u1o8npl" path="res://sprites/forest background dark.png" id="2_f1qbk"]
+[ext_resource type="PackedScene" uid="uid://dc56dcx6qc7eh" path="res://scenes/game.tscn" id="2_fd7lg"]
+[ext_resource type="PackedScene" uid="uid://bfsdv5d1qot81" path="res://scenes/options_menu.tscn" id="3_4qvbb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_v7qki"]
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("continue_button", "default_focus", "main_submenu", "options_menu")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ac4wu")
+game_scene = ExtResource("2_fd7lg")
+continue_button = NodePath("MainMenu/ContinueButton")
+default_focus = NodePath("MainMenu/NewGameButton")
+main_submenu = NodePath("MainMenu")
+options_menu = NodePath("OptionsMenu")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_f1qbk")
+
+[node name="MainMenu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="MainMenu"]
+layout_mode = 2
+text = "LightHop"
+label_settings = SubResource("LabelSettings_v7qki")
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="MainMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Continue"
+flat = true
+
+[node name="NewGameButton" type="Button" parent="MainMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "New Game"
+flat = true
+
+[node name="OptionsButton" type="Button" parent="MainMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Options"
+flat = true
+
+[node name="QuitButton" type="Button" parent="MainMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Quit"
+flat = true
+
+[node name="OptionsMenu" parent="." instance=ExtResource("3_4qvbb")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="MainMenu/ContinueButton" to="." method="_on_play_button_pressed" binds= [false]]
+[connection signal="pressed" from="MainMenu/NewGameButton" to="." method="_on_play_button_pressed" binds= [true]]
+[connection signal="pressed" from="MainMenu/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MainMenu/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="back" from="OptionsMenu" to="." method="_on_options_menu_back"]

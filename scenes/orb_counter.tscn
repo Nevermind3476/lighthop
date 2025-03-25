@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnsvb83g52e5x"]
+
+[ext_resource type="Script" path="res://scripts/orb_counter.gd" id="1_ripc7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2tgq5"]
+font_size = 32
+font_color = Color(0.462745, 0.258824, 0.541176, 1)
+outline_size = 1
+outline_color = Color(0, 0.137255, 0, 1)
+
+[node name="OrbCounter" type="Label"]
+anchors_preset = -1
+offset_left = -22.0
+offset_top = -11.0
+offset_right = 26.0
+offset_bottom = 17.0
+text = "0/9"
+label_settings = SubResource("LabelSettings_2tgq5")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_ripc7")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(12, 6)
+rect = Rect2(-4, -4, 8, 8)
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_entered"]

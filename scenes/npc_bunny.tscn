@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dh0dspooljnu7"]
+
+[ext_resource type="Script" path="res://scripts/npc_bunny.gd" id="1_bxn2u"]
+[ext_resource type="Texture2D" uid="uid://3uggvaqy44xt" path="res://sprites/bunny.png" id="1_xt43q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ohbv"]
+size = Vector2(6, 4)
+
+[node name="NPCBunny" type="CharacterBody2D"]
+collision_layer = 16
+script = ExtResource("1_bxn2u")
+gravity = 288.0
+jump_height = 19.0
+horiz_speed = 64.0
+idle_time = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xt43q")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_2ohbv")

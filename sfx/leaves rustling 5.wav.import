@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c3nphm47sfwud"
+path="res://.godot/imported/leaves rustling 5.wav-d5cac21a21ae12c85120ba54f743bea4.sample"
+
+[deps]
+
+source_file="res://sfx/leaves rustling 5.wav"
+dest_files=["res://.godot/imported/leaves rustling 5.wav-d5cac21a21ae12c85120ba54f743bea4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

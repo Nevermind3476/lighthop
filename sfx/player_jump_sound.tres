@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://cqvsrvg18half"]
+
+[ext_resource type="AudioStream" uid="uid://dmwkw2gxhgvp" path="res://sfx/717769__1bob__jump-boing.wav" id="1_lwq37"]
+
+[resource]
+playback_mode = 1
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("1_lwq37")

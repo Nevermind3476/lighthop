@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cddyccowffmt0"]
+
+[ext_resource type="AudioStream" uid="uid://bek5i34vihfub" path="res://foret loop.ogg" id="1_1kgw5"]
+[ext_resource type="Script" path="res://scripts/music_player.gd" id="2_sdewl"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_1kgw5")
+volume_db = -4.0
+autoplay = true
+bus = &"Music"
+script = ExtResource("2_sdewl")

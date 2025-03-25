@@ -1,0 +1,207 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfsdv5d1qot81"]
+
+[ext_resource type="Script" path="res://scripts/options_menu.gd" id="1_036pg"]
+[ext_resource type="Script" path="res://scripts/controls_menu.gd" id="2_0ah6d"]
+[ext_resource type="Script" path="res://scripts/control_button.gd" id="3_dqpxg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nrady"]
+bg_color = Color(0.129412, 0.129412, 0.129412, 0.768627)
+
+[node name="OptionsMenu" type="Control" node_paths=PackedStringArray("default_focus")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_036pg")
+default_focus = NodePath("MainSubmenuMargins/MainSubmenu/MasterVolume/MasterVolumeSlider")
+
+[node name="MainSubmenuMargins" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="MainSubmenu" type="VBoxContainer" parent="MainSubmenuMargins"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="MasterVolume" type="VBoxContainer" parent="MainSubmenuMargins/MainSubmenu"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MasterVolumeLabel" type="Label" parent="MainSubmenuMargins/MainSubmenu/MasterVolume"]
+layout_mode = 2
+text = "Master Volume"
+horizontal_alignment = 1
+
+[node name="MasterVolumeSlider" type="HSlider" parent="MainSubmenuMargins/MainSubmenu/MasterVolume"]
+layout_mode = 2
+max_value = 10.0
+value = 10.0
+
+[node name="Music" type="VBoxContainer" parent="MainSubmenuMargins/MainSubmenu"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MusicVolumeLabel" type="Label" parent="MainSubmenuMargins/MainSubmenu/Music"]
+layout_mode = 2
+text = "Music
+"
+horizontal_alignment = 1
+
+[node name="MusicVolumeSlider" type="HSlider" parent="MainSubmenuMargins/MainSubmenu/Music"]
+layout_mode = 2
+max_value = 10.0
+value = 10.0
+
+[node name="SoundEffects" type="VBoxContainer" parent="MainSubmenuMargins/MainSubmenu"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="SoundVolumeLabel" type="Label" parent="MainSubmenuMargins/MainSubmenu/SoundEffects"]
+layout_mode = 2
+text = "Sound Effects
+"
+horizontal_alignment = 1
+
+[node name="SoundVolumeSlider" type="HSlider" parent="MainSubmenuMargins/MainSubmenu/SoundEffects"]
+layout_mode = 2
+max_value = 10.0
+value = 10.0
+
+[node name="FullscreenButton" type="Button" parent="MainSubmenuMargins/MainSubmenu"]
+layout_mode = 2
+text = "Fullscreen: On"
+flat = true
+
+[node name="ControlsButton" type="Button" parent="MainSubmenuMargins/MainSubmenu"]
+layout_mode = 2
+text = "Keybinds"
+flat = true
+
+[node name="BackButton" type="Button" parent="MainSubmenuMargins/MainSubmenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+flat = true
+
+[node name="ControlsSubmenuMargins" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ControlsSubmenu" type="VBoxContainer" parent="ControlsSubmenuMargins" node_paths=PackedStringArray("rebind_indicator", "default_focus")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+script = ExtResource("2_0ah6d")
+rebind_indicator = NodePath("../../RebindIndicator")
+default_focus = NodePath("ScrollContainer/ButtonsContainer/Left")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ControlsSubmenuMargins/ControlsSubmenu"]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="ControlsSubmenuMargins/ControlsSubmenu/ScrollContainer"]
+layout_mode = 2
+
+[node name="Left" type="Button" parent="ControlsSubmenuMargins/ControlsSubmenu/ScrollContainer/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Walk Left:  CTRL:left:"
+flat = true
+alignment = 0
+script = ExtResource("3_dqpxg")
+input_action = "left"
+
+[node name="Right" type="Button" parent="ControlsSubmenuMargins/ControlsSubmenu/ScrollContainer/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Walk Right: CTRL:right:"
+flat = true
+alignment = 0
+script = ExtResource("3_dqpxg")
+input_action = "right"
+
+[node name="Jump" type="Button" parent="ControlsSubmenuMargins/ControlsSubmenu/ScrollContainer/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Jump: CTRL:jump:"
+flat = true
+alignment = 0
+script = ExtResource("3_dqpxg")
+input_action = "jump"
+
+[node name="Charge Jump" type="Button" parent="ControlsSubmenuMargins/ControlsSubmenu/ScrollContainer/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Charge Jump: CTRL:charge_jump:"
+flat = true
+alignment = 0
+script = ExtResource("3_dqpxg")
+input_action = "charge_jump"
+
+[node name="BackButton" type="Button" parent="ControlsSubmenuMargins/ControlsSubmenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+flat = true
+
+[node name="RebindIndicator" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nrady")
+
+[node name="Label" type="Label" parent="RebindIndicator"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = -5.0
+offset_right = 74.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press a new key for this action"
+horizontal_alignment = 1
+
+[connection signal="value_changed" from="MainSubmenuMargins/MainSubmenu/MasterVolume/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="MainSubmenuMargins/MainSubmenu/Music/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="MainSubmenuMargins/MainSubmenu/SoundEffects/SoundVolumeSlider" to="." method="_on_sound_volume_slider_value_changed"]
+[connection signal="pressed" from="MainSubmenuMargins/MainSubmenu/FullscreenButton" to="." method="_on_fullscreen_button_pressed"]
+[connection signal="toggled" from="MainSubmenuMargins/MainSubmenu/FullscreenButton" to="." method="_on_fullscreen_button_toggled"]
+[connection signal="pressed" from="MainSubmenuMargins/MainSubmenu/ControlsButton" to="." method="_on_controls_button_pressed"]
+[connection signal="pressed" from="MainSubmenuMargins/MainSubmenu/BackButton" to="." method="_return"]
+[connection signal="rebind" from="ControlsSubmenuMargins/ControlsSubmenu/ScrollContainer/ButtonsContainer/Left" to="ControlsSubmenuMargins/ControlsSubmenu" method="listen_for_keybind"]
+[connection signal="rebind" from="ControlsSubmenuMargins/ControlsSubmenu/ScrollContainer/ButtonsContainer/Right" to="ControlsSubmenuMargins/ControlsSubmenu" method="listen_for_keybind"]
+[connection signal="rebind" from="ControlsSubmenuMargins/ControlsSubmenu/ScrollContainer/ButtonsContainer/Jump" to="ControlsSubmenuMargins/ControlsSubmenu" method="listen_for_keybind"]
+[connection signal="rebind" from="ControlsSubmenuMargins/ControlsSubmenu/ScrollContainer/ButtonsContainer/Charge Jump" to="ControlsSubmenuMargins/ControlsSubmenu" method="listen_for_keybind"]
+[connection signal="pressed" from="ControlsSubmenuMargins/ControlsSubmenu/BackButton" to="." method="_on_return_to_main_submenu"]

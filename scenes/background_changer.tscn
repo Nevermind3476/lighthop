@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://hecwhojybbp"]
+
+[ext_resource type="Script" path="res://scripts/background_changer.gd" id="1_bg2m4"]
+
+[node name="BackgroundChanger" type="VisibleOnScreenNotifier2D"]
+rect = Rect2(-4, -4, 8, 8)
+script = ExtResource("1_bg2m4")

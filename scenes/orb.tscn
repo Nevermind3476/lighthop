@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://it0d7ohwhn5k"]
+
+[ext_resource type="Script" path="res://scripts/upgrade.gd" id="1_whhrb"]
+[ext_resource type="Texture2D" uid="uid://df52cxadp8rrq" path="res://sprites/orb.png" id="2_nb5hu"]
+[ext_resource type="AudioStream" uid="uid://co0f1iipy8hnd" path="res://sfx/chime.wav" id="4_ss31o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ybf05"]
+radius = 4.0
+
+[node name="Orb" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_whhrb")
+type = 2
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_nb5hu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ybf05")
+debug_color = Color(0.129436, 0.64432, 0.158416, 0.42)
+
+[node name="Chime" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ss31o")
+max_distance = 100.0
+bus = &"Sound Effects"
+
+[connection signal="collected" from="." to="Chime" method="play"]
+[connection signal="collected" from="." to="Sprite" method="set_visible" binds= [false]]
+[connection signal="collected" from="." to="CollisionShape2D" method="set_disabled" flags=3 binds= [true]]

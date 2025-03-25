@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://dmu53y6n8xmam"]
+
+[ext_resource type="Texture2D" uid="uid://r4uf20rsvvow" path="res://sprites/charge_upgrade.png" id="1_0q7ua"]
+[ext_resource type="Script" path="res://scripts/upgrade.gd" id="1_q6d5q"]
+[ext_resource type="AudioStream" uid="uid://cv0btuef4xj4m" path="res://sfx/heartbeat.wav" id="3_cv2sq"]
+[ext_resource type="AudioStream" uid="uid://co0f1iipy8hnd" path="res://sfx/chime.wav" id="4_mshbt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhf05"]
+atlas = ExtResource("1_0q7ua")
+region = Rect2(12, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmeex"]
+atlas = ExtResource("1_0q7ua")
+region = Rect2(24, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0uwn"]
+atlas = ExtResource("1_0q7ua")
+region = Rect2(0, 0, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o8v6f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhf05")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmeex")
+}, {
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_r0uwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhf05")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmeex")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_r0uwn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ybf05"]
+radius = 5.0
+
+[node name="Upgrade" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_q6d5q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_o8v6f")
+autoplay = "default"
+frame_progress = 0.489891
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ybf05")
+debug_color = Color(0.129436, 0.64432, 0.158416, 0.42)
+
+[node name="Heartbeat" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_cv2sq")
+autoplay = true
+max_distance = 96.0
+bus = &"Sound Effects"
+
+[node name="Chime" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_mshbt")
+max_distance = 100.0
+bus = &"Sound Effects"
+
+[connection signal="collected" from="." to="Heartbeat" method="stop"]
+[connection signal="collected" from="." to="Chime" method="play"]
+[connection signal="collected" from="." to="AnimatedSprite2D" method="set_visible" binds= [false]]
+[connection signal="collected" from="." to="CollisionShape2D" method="set_disabled" flags=3 binds= [true]]

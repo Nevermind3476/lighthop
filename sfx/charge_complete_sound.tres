@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://c7c1uiwk4yd04"]
+
+[ext_resource type="AudioStream" uid="uid://co0f1iipy8hnd" path="res://sfx/chime.wav" id="1_gytrv"]
+
+[resource]
+playback_mode = 1
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("1_gytrv")

@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://cac1mi3xo21dj"]
+
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_0dfax"]
+[ext_resource type="Theme" uid="uid://bcg8prklrnnu5" path="res://default_theme.tres" id="1_6kn0u"]
+[ext_resource type="PackedScene" uid="uid://cnsvb83g52e5x" path="res://scenes/orb_counter.tscn" id="3_cwhb0"]
+[ext_resource type="PackedScene" uid="uid://bfsdv5d1qot81" path="res://scenes/options_menu.tscn" id="3_h2gv0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yr8ip"]
+font_color = Color(0.462745, 0.258824, 0.541176, 1)
+
+[node name="PauseMenu" type="CanvasLayer" node_paths=PackedStringArray("default_button", "respawn_button", "orb_counter", "options_menu", "main_submenu")]
+process_mode = 3
+layer = 2
+script = ExtResource("1_0dfax")
+default_button = NodePath("Panel/MainSubmenu/Resume")
+respawn_button = NodePath("Panel/MainSubmenu/Respawn")
+orb_counter = NodePath("Panel/MainSubmenu/OrbCounter")
+options_menu = NodePath("Panel/OptionsMenu")
+main_submenu = NodePath("Panel/MainSubmenu")
+
+[node name="Panel" type="Panel" parent="."]
+process_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainSubmenu" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/MainSubmenu"]
+layout_mode = 2
+theme = ExtResource("1_6kn0u")
+theme_override_font_sizes/font_size = 16
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Resume" type="Button" parent="Panel/MainSubmenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Resume"
+flat = true
+
+[node name="Options" type="Button" parent="Panel/MainSubmenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Options"
+flat = true
+
+[node name="Respawn" type="Button" parent="Panel/MainSubmenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Respawn"
+flat = true
+
+[node name="Quit" type="Button" parent="Panel/MainSubmenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Quit"
+flat = true
+
+[node name="OrbCounter" parent="Panel/MainSubmenu" instance=ExtResource("3_cwhb0")]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_yr8ip")
+
+[node name="OptionsMenu" parent="Panel" instance=ExtResource("3_h2gv0")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="Panel/MainSubmenu/Resume" to="." method="unpause"]
+[connection signal="pressed" from="Panel/MainSubmenu/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Panel/MainSubmenu/Respawn" to="." method="_on_respawn_pressed"]
+[connection signal="pressed" from="Panel/MainSubmenu/Quit" to="." method="quit"]
+[connection signal="back" from="Panel/OptionsMenu" to="." method="_on_options_menu_back"]

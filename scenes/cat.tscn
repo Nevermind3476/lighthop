@@ -1,0 +1,117 @@
+[gd_scene load_steps=15 format=3 uid="uid://bw82taoshhhw3"]
+
+[ext_resource type="Texture2D" uid="uid://cl7gshe83elr" path="res://sprites/cat.png" id="1_3ts05"]
+[ext_resource type="Script" path="res://scripts/cat.gd" id="1_dqicm"]
+[ext_resource type="AudioStream" uid="uid://crauy61mw5j4a" path="res://chase - enweave.mp3" id="2_xpghw"]
+[ext_resource type="AudioStream" uid="uid://c3nphm47sfwud" path="res://sfx/leaves rustling 5.wav" id="3_3aie8"]
+[ext_resource type="Texture2D" uid="uid://b1eq8ofjjr0yb" path="res://sprites/cat_climb.png" id="3_kyeuk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q07rk"]
+atlas = ExtResource("3_kyeuk")
+region = Rect2(0, 0, 26, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqagl"]
+atlas = ExtResource("3_kyeuk")
+region = Rect2(26, 0, 26, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwb3x"]
+atlas = ExtResource("3_kyeuk")
+region = Rect2(52, 0, 26, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqgua"]
+atlas = ExtResource("3_kyeuk")
+region = Rect2(78, 0, 26, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpiig"]
+atlas = ExtResource("1_3ts05")
+region = Rect2(0, 0, 26, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ahs52"]
+atlas = ExtResource("1_3ts05")
+region = Rect2(52, 0, 26, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71ujb"]
+atlas = ExtResource("1_3ts05")
+region = Rect2(26, 0, 26, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s0pmg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q07rk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mqagl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwb3x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqgua")
+}],
+"loop": true,
+"name": &"climb",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpiig")
+}],
+"loop": false,
+"name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ahs52")
+}],
+"loop": false,
+"name": &"hide",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71ujb")
+}],
+"loop": false,
+"name": &"leap",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y0csd"]
+size = Vector2(17, 10)
+
+[node name="Cat" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_dqicm")
+chase_music = ExtResource("2_xpghw")
+initial_wait_time = 0.5
+end_music_fade_time = 5.0
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 4
+sprite_frames = SubResource("SpriteFrames_s0pmg")
+animation = &"hide"
+autoplay = "hide"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 3)
+shape = SubResource("RectangleShape2D_y0csd")
+debug_color = Color(0.997033, 0, 0.174679, 0.42)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-0.5, 3)
+shape = SubResource("RectangleShape2D_y0csd")
+disabled = true
+debug_color = Color(0.997033, 0, 0.174679, 0.42)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_3aie8")
+pitch_scale = 0.8
+
+[connection signal="aggroed" from="." to="AudioStreamPlayer2D" method="play"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

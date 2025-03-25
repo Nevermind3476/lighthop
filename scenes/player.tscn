@@ -1,0 +1,92 @@
+[gd_scene load_steps=11 format=3 uid="uid://dpj8a2mr7p2rt"]
+
+[ext_resource type="Texture2D" uid="uid://3uggvaqy44xt" path="res://sprites/bunny.png" id="1_2c7hx"]
+[ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_13vpl"]
+[ext_resource type="AudioStream" uid="uid://cqvsrvg18half" path="res://sfx/player_jump_sound.tres" id="3_pgs3y"]
+[ext_resource type="AudioStream" uid="uid://c7c1uiwk4yd04" path="res://sfx/charge_complete_sound.tres" id="4_6ax5s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37tid"]
+atlas = ExtResource("1_2c7hx")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rthfs"]
+atlas = ExtResource("1_2c7hx")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6n5w8"]
+atlas = ExtResource("1_2c7hx")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_re0f4"]
+atlas = ExtResource("1_2c7hx")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h3mrq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37tid")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rthfs")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6n5w8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_re0f4")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ulqqg"]
+size = Vector2(6, 4)
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 2
+script = ExtResource("1_13vpl")
+coyote_time = 0.1
+jump_buffer_time = 0.1
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_h3mrq")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_ulqqg")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_pgs3y")
+volume_db = -6.0
+bus = &"Sound Effects"
+
+[node name="ChargeJumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_pgs3y")
+volume_db = -4.0
+bus = &"Sound Effects"
+
+[node name="ChargeCompleteSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_6ax5s")
+volume_db = -1.0
+pitch_scale = 2.0
+
+[connection signal="charge_complete" from="." to="ChargeCompleteSound" method="play"]
+[connection signal="charge_jumped" from="." to="ChargeJumpSound" method="play"]
+[connection signal="jumped" from="." to="JumpSound" method="play"]

@@ -562,7 +562,7 @@ position = Vector2(764, 248)
 script = ExtResource("13_7pirh")
 
 [node name="Marker2D37" type="Marker2D" parent="CatEncounter/Cat/Path"]
-position = Vector2(732, 240)
+position = Vector2(730, 240)
 script = ExtResource("13_7pirh")
 pounce_height = 15
 wait_time = 0.0

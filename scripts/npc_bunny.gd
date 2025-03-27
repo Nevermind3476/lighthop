@@ -12,7 +12,10 @@ var idle: = true
 
 @onready var sprite: = $Sprite2D as Sprite2D
 
+const possible_colors: Array[Color] = [Color.LIGHT_GRAY, Color.LEMON_CHIFFON, Color.DARK_GRAY]
+
 func _ready() -> void:
+	#modulate = possible_colors.pick_random()
 	jump_force = sqrt(2 * gravity * jump_height)
 	timer = idle_time * randf_range(0.5, 1.5)
 
